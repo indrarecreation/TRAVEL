@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRIPCRAFT INDIA | Plan Your Journey</title>
+<meta name="description" content="Create your personalised India trip requirement in minutes.">
+<style>
+:root{
+  --bg:#07110f;--card:rgba(255,255,255,.09);--line:rgba(255,255,255,.15);
+  --text:#f8fbf7;--muted:#b8c8c0;--accent:#d8ff72;--accent2:#8ee6c8;
+  --dark:#0c1714;--danger:#ff9b9b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.hero{
+  min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;
+  background:
+    linear-gradient(120deg,rgba(3,12,10,.92),rgba(3,12,10,.48),rgba(3,12,10,.88)),
+    radial-gradient(circle at 75% 20%,rgba(216,255,114,.18),transparent 35%),
+    linear-gradient(135deg,#123b32,#07110f 60%);
+}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(3px);opacity:.45}
+.hero:before{width:420px;height:420px;background:#2b7862;right:-130px;top:-130px}
+.hero:after{width:280px;height:280px;background:#d8ff72;left:-150px;bottom:-100px;opacity:.12}
+.wrap{width:min(1160px,92%);margin:auto;position:relative;z-index:2}
+nav{position:absolute;top:0;left:0;right:0;padding:26px 4%;display:flex;justify-content:space-between;align-items:center;z-index:5}
+.logo{font-weight:900;letter-spacing:2px}.logo span{color:var(--accent)}
+.navpill{border:1px solid var(--line);padding:10px 16px;border-radius:30px;color:var(--muted);font-size:13px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;padding-top:70px}
+.kicker{color:var(--accent);letter-spacing:3px;font-size:12px;font-weight:800;margin-bottom:18px}
+h1{font-size:clamp(48px,7vw,88px);line-height:.94;letter-spacing:-4px;max-width:760px}
+.hero p{font-size:18px;color:var(--muted);line-height:1.7;max-width:650px;margin:28px 0}
+.cta{display:inline-flex;align-items:center;gap:12px;border:0;background:var(--accent);color:#102016;padding:16px 22px;border-radius:16px;font-weight:900;box-shadow:0 12px 40px rgba(216,255,114,.15)}
+.hero-card{background:rgba(255,255,255,.07);border:1px solid var(--line);backdrop-filter:blur(20px);border-radius:32px;padding:22px;transform:rotate(2deg);box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.hero-card .visual{height:430px;border-radius:24px;display:flex;align-items:flex-end;padding:28px;background:
+linear-gradient(180deg,transparent 25%,rgba(0,0,0,.78)),
+radial-gradient(circle at 65% 25%,#d7b56e 0 8%,transparent 9%),
+linear-gradient(135deg,#6b9b83,#27483d 45%,#101c18)}
+.visual h3{font-size:30px;line-height:1}.visual small{color:#d5e0db}
+.section{padding:100px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}.section-head h2{font-size:42px;letter-spacing:-2px}.section-head p{color:var(--muted);max-width:560px;line-height:1.6}
+.progress-wrap{position:sticky;top:0;z-index:20;background:rgba(7,17,15,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.progress{width:min(900px,92%);margin:auto;padding:15px 0;display:flex;gap:8px}
+.progress span{height:5px;flex:1;background:#20302b;border-radius:20px;transition:.35s}.progress span.active{background:var(--accent)}
+.step{display:none;animation:rise .45s ease}.step.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.option{border:1px solid var(--line);background:var(--card);border-radius:22px;padding:22px;min-height:120px;transition:.25s;text-align:left;color:var(--text)}
+.option:hover{transform:translateY(-4px);border-color:rgba(216,255,114,.5)}
+.option.selected{border-color:var(--accent);background:rgba(216,255,114,.12);box-shadow:0 0 0 1px var(--accent) inset}
+.option b{display:block;font-size:18px;margin-bottom:8px}.option small{color:var(--muted);line-height:1.4}
+.option .icon{font-size:30px;margin-bottom:15px}
+.destination .option{min-height:150px;background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.035))}
+.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{margin-bottom:18px}.field label{display:block;color:#dce9e3;font-size:13px;font-weight:700;margin:0 0 8px 3px}
+input,textarea{width:100%;background:#0d1b17;border:1px solid var(--line);color:var(--text);padding:15px 16px;border-radius:15px;outline:none}
+input:focus,textarea:focus{border-color:var(--accent)}textarea{min-height:120px;resize:vertical}
+.actions{display:flex;justify-content:space-between;gap:15px;margin-top:28px}.btn{padding:14px 20px;border-radius:14px;border:1px solid var(--line);background:transparent;color:var(--text);font-weight:800}.btn.primary{background:var(--accent);color:#102016;border-color:var(--accent)}
+.summary{background:linear-gradient(145deg,rgba(216,255,114,.13),rgba(142,230,200,.06));border:1px solid rgba(216,255,114,.35);border-radius:28px;padding:26px;margin-bottom:24px}
+.summary-row{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line)}.summary-row:last-child{border:0}.summary-row span{color:var(--muted)}
+.success{display:none;text-align:center;padding:80px 20px}.success.show{display:block}.success .check{width:90px;height:90px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#102016;font-size:45px;margin:0 auto 25px}
+footer{padding:45px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#f5fff9;color:#102016;padding:13px 18px;border-radius:13px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:100}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:850px){.hero-grid{grid-template-columns:1fr}.hero-card{display:none}.grid{grid-template-columns:1fr 1fr}.section{padding:75px 0}h1{letter-spacing:-2px}.section-head{display:block}.section-head p{margin-top:12px}}
+@media(max-width:560px){.grid,.fieldgrid{grid-template-columns:1fr}.hero{min-height:90vh}.navpill{display:none}.section-head h2{font-size:34px}.option{min-height:105px}.actions{position:sticky;bottom:0;background:rgba(7,17,15,.94);padding:12px 0;z-index:10}.hero p{font-size:16px}}
+</style>
+</head>
+<body>
+
+<section class="hero">
+<nav><div class="logo">TRIP<span>CRAFT</span> INDIA</div><div class="navpill">PERSONALISED INDIA TRAVEL</div></nav>
+<div class="wrap hero-grid">
+  <div>
+    <div class="kicker">YOUR JOURNEY • YOUR WAY</div>
+    <h1>Tell us your dream. We'll shape the trip.</h1>
+    <p>Build your India trip requirement in a few simple swipes. Choose your destination, days, travellers, style and budget — then send it directly to your trip coordinator.</p>
+    <button class="cta" onclick="document.getElementById('planner').scrollIntoView({behavior:'smooth'})">START PLANNING <span>→</span></button>
+  </div>
+  <div class="hero-card"><div class="visual"><div><small>DISCOVER • EXPERIENCE • REMEMBER</small><h3>India is waiting.</h3></div></div></div>
+</div>
+</section>
+
+<div class="progress-wrap"><div class="progress" id="progress"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+<main id="planner" class="section">
+<div class="wrap">
+  <div class="section-head"><div><div class="kicker">TRIP BUILDER</div><h2>Create your trip</h2></div><p>There are no complicated forms here. Pick what suits you and we'll use the details to prepare a suitable trip plan.</p></div>
+
+  <form id="tripForm" onsubmit="return false">
+    <div class="step active" data-step="1">
+      <div class="kicker">01 / DESTINATION</div><h2>Where do you want to go?</h2><br>
+      <div class="grid destination">
+        <button type="button" class="option" data-group="destination" data-value="Kerala"><div class="icon">🌴</div><b>Kerala</b><small>Backwaters, hills, beaches & culture</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Goa"><div class="icon">🏖️</div><b>Goa</b><small>Beaches, sunsets & coastal life</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Kashmir"><div class="icon">🏔️</div><b>Kashmir</b><small>Valleys, lakes & mountain escapes</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Rajasthan"><div class="icon">🏰</div><b>Rajasthan</b><small>Forts, palaces & desert journeys</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Himachal Pradesh"><div class="icon">⛰️</div><b>Himachal Pradesh</b><small>Mountains, valleys & adventure</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Tamil Nadu"><div class="icon">🛕</div><b>Tamil Nadu</b><small>Temples, heritage & southern India</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Karnataka"><div class="icon">🌿</div><b>Karnataka</b><small>Nature, heritage & city breaks</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Northeast India"><div class="icon">🌄</div><b>Northeast India</b><small>Scenic landscapes & unique culture</small></button>
+        <button type="button" class="option" data-group="destination" data-value="Other / Multiple destinations"><div class="icon">✨</div><b>Other / Multiple</b><small>Tell us in the next step</small></button>
+      </div>
+      <div class="actions"><span></span><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
+    </div>
+
+    <div class="step" data-step="2">
+      <div class="kicker">02 / DURATION</div><h2>How many days?</h2><br>
+      <div class="grid">
+        <button type="button" class="option" data-group="days" data-value="2–3 Days"><b>2–3 Days</b><small>Quick escape</small></button>
+        <button type="button" class="option" data-group="days" data-value="4–5 Days"><b>4–5 Days</b><small>Short holiday</small></button>
+        <button type="button" class="option" data-group="days" data-value="6–7 Days"><b>6–7 Days</b><small>Classic getaway</small></button>
+        <button type="button" class="option" data-group="days" data-value="8–10 Days"><b>8–10 Days</b><small>Explore deeper</small></button>
+        <button type="button" class="option" data-group="days" data-value="11–14 Days"><b>11–14 Days</b><small>Big journey</small></button>
+        <button type="button" class="option" data-group="days" data-value="15+ Days"><b>15+ Days</b><small>Long adventure</small></button>
+      </div>
+      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
+    </div>
+
+    <div class="step" data-step="3">
+      <div class="kicker">03 / TRAVELLERS</div><h2>Who's travelling?</h2><br>
+      <div class="fieldgrid">
+        <div class="field"><label>Adults</label><input id="adults" type="number" min="1" value="2"></div>
+        <div class="field"><label>Children</label><input id="children" type="number" min="0" value="0"></div>
+      </div>
+      <div class="grid">
+        <button type="button" class="option" data-group="tripType" data-value="Family"><div class="icon">👨‍👩‍👧‍👦</div><b>Family</b></button>
+        <button type="button" class="option" data-group="tripType" data-value="Couple"><div class="icon">❤️</div><b>Couple</b></button>
+        <button type="button" class="option" data-group="tripType" data-value="Friends"><div class="icon">🧑‍🤝‍🧑</div><b>Friends</b></button>
+        <button type="button" class="option" data-group="tripType" data-value="Solo"><div class="icon">🎒</div><b>Solo</b></button>
+        <button type="button" class="option" data-group="tripType" data-value="Honeymoon"><div class="icon">💍</div><b>Honeymoon</b></button>
+        <button type="button" class="option" data-group="tripType" data-value="Adventure"><div class="icon">🧗</div><b>Adventure</b></button>
+      </div>
+      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
+    </div>
+
+    <div class="step" data-step="4">
+      <div class="kicker">04 / BUDGET</div><h2>What is your trip budget?</h2><br>
+      <div class="grid">
+        <button type="button" class="option" data-group="budget" data-value="Below ₹20,000"><b>Below ₹20,000</b><small>Budget escape</small></button>
+        <button type="button" class="option" data-group="budget" data-value="₹20,000 – ₹40,000"><b>₹20K – ₹40K</b><small>Value travel</small></button>
+        <button type="button" class="option" data-group="budget" data-value="₹40,000 – ₹75,000"><b>₹40K – ₹75K</b><small>Comfort travel</small></button>
+        <button type="button" class="option" data-group="budget" data-value="₹75,000 – ₹1.5 Lakh"><b>₹75K – ₹1.5L</b><small>Premium travel</small></button>
+        <button type="button" class="option" data-group="budget" data-value="₹1.5 Lakh+"><b>₹1.5 Lakh+</b><small>Luxury & premium</small></button>
+        <button type="button" class="option" data-group="budget" data-value="Custom budget"><b>Custom</b><small>Tell us your amount</small></button>
+      </div>
+      <div class="field" style="margin-top:18px"><label>Custom budget / details (optional)</label><input id="customBudget" placeholder="Example: ₹65,000 for 4 people"></div>
+      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
+    </div>
+
+    <div class="step" data-step="5">
+      <div class="kicker">05 / REQUIREMENTS</div><h2>What should we arrange?</h2><br>
+      <div class="grid">
+        <button type="button" class="option multi" data-group="requirements" data-value="Hotels"><div class="icon">🏨</div><b>Hotels</b></button>
+        <button type="button" class="option multi" data-group="requirements" data-value="Transportation"><div class="icon">🚗</div><b>Transportation</b></button>
+        <button type="button" class="option multi" data-group="requirements" data-value="Sightseeing"><div class="icon">📸</div><b>Sightseeing</b></button>
+        <button type="button" class="option multi" data-group="requirements" data-value="Food"><div class="icon">🍽️</div><b>Food</b></button>
+        <button type="button" class="option multi" data-group="requirements" data-value="Airport / Railway Pickup"><div class="icon">🛬</div><b>Pickup / Drop</b></button>
+        <button type="button" class="option multi" data-group="requirements" data-value="Tour Guide"><div class="icon">🧭</div><b>Tour Guide</b></button>
+      </div>
+      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
+    </div>
+
+    <div class="step" data-step="6">
+      <div class="kicker">06 / TRAVEL DATE & START</div><h2>When and from where?</h2><br>
+      <div class="fieldgrid">
+        <div class="field"><label>Preferred travel date</label><input id="travelDate" type="date"></div>
+        <div class="field"><label>Starting city / location</label><input id="startLocation" placeholder="Example: Kochi"></div>
+      </div>
+      <div class="field"><label>Anything else we should know?</label><textarea id="message" placeholder="Special requests, hotel preference, places you want to visit, etc."></textarea></div>
+      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Review trip →</button></div>
+    </div>
+
+    <div class="step" data-step="7">
+      <div class="kicker">07 / YOUR DETAILS</div><h2>Where can we contact you?</h2><br>
+      <div class="fieldgrid">
+        <div class="field"><label>Full name *</label><input id="name" required placeholder="Your name"></div>
+        <div class="field"><label>WhatsApp number *</label><input id="phone" required inputmode="tel" placeholder="10-digit mobile number"></div>
+        <div class="field"><label>Email (optional)</label><input id="email" type="email" placeholder="you@example.com"></div>
+      </div>
+      <div class="summary" id="summary"></div>
+      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" id="submitBtn" type="button" onclick="submitTrip()">SEND MY TRIP REQUEST ✈️</button></div>
+    </div>
+  </form>
+
+  <div class="success" id="success">
+    <div class="check">✓</div><h2>Trip request received!</h2>
+    <p style="color:var(--muted);max-width:600px;margin:18px auto;line-height:1.7">Your requirement has been prepared. Your trip coordinator can now contact you and build your India journey.</p>
+    <button class="cta" onclick="location.reload()">PLAN ANOTHER TRIP</button>
+  </div>
+</div>
+</main>
+
+<footer><div class="wrap"><div class="logo">TRIP<span>CRAFT</span> INDIA</div><br>Personalised trip planning for journeys across India.</div></footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= BUSINESS SETTINGS ================= */
+const CONFIG = {
+  APPS_SCRIPT_URL: "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE",
+  SELLER_WHATSAPP: "91XXXXXXXXXX" // Example: 919876543210
+};
+/* ===================================================== */
+
+let step=1;
+const data={destination:"",days:"",tripType:"",budget:"",requirements:[],adults:2,children:0};
+
+document.querySelectorAll(".option").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const group=btn.dataset.group, value=btn.dataset.value;
+    if(group==="requirements"){
+      btn.classList.toggle("selected");
+      data.requirements=[...document.querySelectorAll('.option[data-group="requirements"].selected')].map(x=>x.dataset.value);
+    }else{
+      document.querySelectorAll(`.option[data-group="${group}"]`).forEach(x=>x.classList.remove("selected"));
+      btn.classList.add("selected"); data[group]=value;
+    }
+    if(group==="destination" && value==="Other / Multiple destinations"){
+      showToast("You can describe your destinations in the final message.");
+    }
+    if(step===7) buildSummary();
+  });
+});
+
+function showToast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2600)}
+function validateStep(){
+  if(step===1&&!data.destination){showToast("Please select a destination.");return false}
+  if(step===2&&!data.days){showToast("Please select trip duration.");return false}
+  if(step===3){
+    data.adults=Math.max(1,parseInt(document.getElementById("adults").value)||1);
+    data.children=Math.max(0,parseInt(document.getElementById("children").value)||0);
+    if(!data.tripType){showToast("Please select your trip style.");return false}
+  }
+  if(step===4&&!data.budget){showToast("Please select a budget.");return false}
+  if(step===5&&data.requirements.length===0){showToast("Select at least one requirement.");return false}
+  return true;
+}
+function nextStep(){if(!validateStep())return;step=Math.min(7,step+1);renderStep()}
+function prevStep(){step=Math.max(1,step-1);renderStep()}
+function renderStep(){
+  document.querySelectorAll(".step").forEach(x=>x.classList.toggle("active",+x.dataset.step===step));
+  document.querySelectorAll("#progress span").forEach((x,i)=>x.classList.toggle("active",i<step));
+  if(step===7)buildSummary();
+  document.getElementById("planner").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function buildSummary(){
+  const custom=document.getElementById("customBudget").value.trim();
+  const budget=data.budget+(custom?` — ${custom}`:"");
+  document.getElementById("summary").innerHTML=`
+    <div class="summary-row"><span>Destination</span><strong>${esc(data.destination)}</strong></div>
+    <div class="summary-row"><span>Duration</span><strong>${esc(data.days)}</strong></div>
+    <div class="summary-row"><span>Travellers</span><strong>${data.adults} Adults · ${data.children} Children</strong></div>
+    <div class="summary-row"><span>Trip style</span><strong>${esc(data.tripType)}</strong></div>
+    <div class="summary-row"><span>Budget</span><strong>${esc(budget)}</strong></div>
+    <div class="summary-row"><span>Requirements</span><strong>${esc(data.requirements.join(", "))}</strong></div>
+    <div class="summary-row"><span>Travel date</span><strong>${esc(document.getElementById("travelDate").value||"Flexible")}</strong></div>
+    <div class="summary-row"><span>Starting point</span><strong>${esc(document.getElementById("startLocation").value||"Not specified")}</strong></div>`;
+}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+async function submitTrip(){
+  const name=document.getElementById("name").value.trim();
+  const phone=document.getElementById("phone").value.replace(/\D/g,"");
+  if(!name){showToast("Please enter your name.");return}
+  if(phone.length<10){showToast("Please enter a valid WhatsApp number.");return}
+  if(!CONFIG.APPS_SCRIPT_URL || CONFIG.APPS_SCRIPT_URL.includes("PASTE_YOUR")){
+    showToast("Add your Apps Script Web App URL in CONFIG first.");return
+  }
+  if(!CONFIG.SELLER_WHATSAPP || CONFIG.SELLER_WHATSAPP.includes("XXXXXXXX")){
+    showToast("Add your WhatsApp number in CONFIG first.");return
+  }
+  data.adults=Math.max(1,parseInt(document.getElementById("adults").value)||1);
+  data.children=Math.max(0,parseInt(document.getElementById("children").value)||0);
+  const custom=document.getElementById("customBudget").value.trim();
+  const payload={
+    name,phone,email:document.getElementById("email").value.trim(),
+    destination:data.destination,days:data.days,adults:data.adults,children:data.children,
+    tripType:data.tripType,budget:data.budget,customBudget:custom,
+    requirements:data.requirements.join(", "),travelDate:document.getElementById("travelDate").value,
+    startLocation:document.getElementById("startLocation").value.trim(),
+    message:document.getElementById("message").value.trim()
+  };
+  const btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="SENDING REQUEST…";
+  try{
+    await fetch(CONFIG.APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+  }catch(e){console.log(e)}
+  const wa=`🌍 *NEW INDIA TRIP REQUEST*%0A%0A👤 *Customer:* ${encodeURIComponent(payload.name)}%0A📱 *WhatsApp:* ${encodeURIComponent(payload.phone)}%0A📍 *Destination:* ${encodeURIComponent(payload.destination)}%0A🗓️ *Duration:* ${encodeURIComponent(payload.days)}%0A👨‍👩‍👧 *Travellers:* ${payload.adults} Adults, ${payload.children} Children%0A❤️ *Trip Style:* ${encodeURIComponent(payload.tripType)}%0A💰 *Budget:* ${encodeURIComponent(payload.budget+(payload.customBudget?" — "+payload.customBudget:""))}%0A🏨 *Requirements:* ${encodeURIComponent(payload.requirements)}%0A📅 *Travel Date:* ${encodeURIComponent(payload.travelDate||"Flexible")}%0A🚩 *Starting From:* ${encodeURIComponent(payload.startLocation||"Not specified")}%0A📝 *Message:* ${encodeURIComponent(payload.message||"None")}`;
+  document.getElementById("tripForm").style.display="none";
+  document.getElementById("success").classList.add("show");
+  setTimeout(()=>window.open(`https://wa.me/${CONFIG.SELLER_WHATSAPP}?text=${wa}`,"_blank"),500);
+}
+document.getElementById("travelDate").min=new Date().toISOString().split("T")[0];
+</script>
+</body>
+</html>
