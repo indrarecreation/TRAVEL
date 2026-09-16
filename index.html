@@ -1,296 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRIPCRAFT INDIA | Plan Your Journey</title>
-<meta name="description" content="Create your personalised India trip requirement in minutes.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>INCHEON KIA • TD Vehicle Audit Portal • Phase 3</title>
 <style>
-:root{
-  --bg:#07110f;--card:rgba(255,255,255,.09);--line:rgba(255,255,255,.15);
-  --text:#f8fbf7;--muted:#b8c8c0;--accent:#d8ff72;--accent2:#8ee6c8;
-  --dark:#0c1714;--danger:#ff9b9b;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-.hero{
-  min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;
-  background:
-    linear-gradient(120deg,rgba(3,12,10,.92),rgba(3,12,10,.48),rgba(3,12,10,.88)),
-    radial-gradient(circle at 75% 20%,rgba(216,255,114,.18),transparent 35%),
-    linear-gradient(135deg,#123b32,#07110f 60%);
-}
-.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(3px);opacity:.45}
-.hero:before{width:420px;height:420px;background:#2b7862;right:-130px;top:-130px}
-.hero:after{width:280px;height:280px;background:#d8ff72;left:-150px;bottom:-100px;opacity:.12}
-.wrap{width:min(1160px,92%);margin:auto;position:relative;z-index:2}
-nav{position:absolute;top:0;left:0;right:0;padding:26px 4%;display:flex;justify-content:space-between;align-items:center;z-index:5}
-.logo{font-weight:900;letter-spacing:2px}.logo span{color:var(--accent)}
-.navpill{border:1px solid var(--line);padding:10px 16px;border-radius:30px;color:var(--muted);font-size:13px}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;padding-top:70px}
-.kicker{color:var(--accent);letter-spacing:3px;font-size:12px;font-weight:800;margin-bottom:18px}
-h1{font-size:clamp(48px,7vw,88px);line-height:.94;letter-spacing:-4px;max-width:760px}
-.hero p{font-size:18px;color:var(--muted);line-height:1.7;max-width:650px;margin:28px 0}
-.cta{display:inline-flex;align-items:center;gap:12px;border:0;background:var(--accent);color:#102016;padding:16px 22px;border-radius:16px;font-weight:900;box-shadow:0 12px 40px rgba(216,255,114,.15)}
-.hero-card{background:rgba(255,255,255,.07);border:1px solid var(--line);backdrop-filter:blur(20px);border-radius:32px;padding:22px;transform:rotate(2deg);box-shadow:0 30px 80px rgba(0,0,0,.3)}
-.hero-card .visual{height:430px;border-radius:24px;display:flex;align-items:flex-end;padding:28px;background:
-linear-gradient(180deg,transparent 25%,rgba(0,0,0,.78)),
-radial-gradient(circle at 65% 25%,#d7b56e 0 8%,transparent 9%),
-linear-gradient(135deg,#6b9b83,#27483d 45%,#101c18)}
-.visual h3{font-size:30px;line-height:1}.visual small{color:#d5e0db}
-.section{padding:100px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:35px}.section-head h2{font-size:42px;letter-spacing:-2px}.section-head p{color:var(--muted);max-width:560px;line-height:1.6}
-.progress-wrap{position:sticky;top:0;z-index:20;background:rgba(7,17,15,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.progress{width:min(900px,92%);margin:auto;padding:15px 0;display:flex;gap:8px}
-.progress span{height:5px;flex:1;background:#20302b;border-radius:20px;transition:.35s}.progress span.active{background:var(--accent)}
-.step{display:none;animation:rise .45s ease}.step.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.option{border:1px solid var(--line);background:var(--card);border-radius:22px;padding:22px;min-height:120px;transition:.25s;text-align:left;color:var(--text)}
-.option:hover{transform:translateY(-4px);border-color:rgba(216,255,114,.5)}
-.option.selected{border-color:var(--accent);background:rgba(216,255,114,.12);box-shadow:0 0 0 1px var(--accent) inset}
-.option b{display:block;font-size:18px;margin-bottom:8px}.option small{color:var(--muted);line-height:1.4}
-.option .icon{font-size:30px;margin-bottom:15px}
-.destination .option{min-height:150px;background:linear-gradient(145deg,rgba(255,255,255,.1),rgba(255,255,255,.035))}
-.fieldgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.field{margin-bottom:18px}.field label{display:block;color:#dce9e3;font-size:13px;font-weight:700;margin:0 0 8px 3px}
-input,textarea{width:100%;background:#0d1b17;border:1px solid var(--line);color:var(--text);padding:15px 16px;border-radius:15px;outline:none}
-input:focus,textarea:focus{border-color:var(--accent)}textarea{min-height:120px;resize:vertical}
-.actions{display:flex;justify-content:space-between;gap:15px;margin-top:28px}.btn{padding:14px 20px;border-radius:14px;border:1px solid var(--line);background:transparent;color:var(--text);font-weight:800}.btn.primary{background:var(--accent);color:#102016;border-color:var(--accent)}
-.summary{background:linear-gradient(145deg,rgba(216,255,114,.13),rgba(142,230,200,.06));border:1px solid rgba(216,255,114,.35);border-radius:28px;padding:26px;margin-bottom:24px}
-.summary-row{display:flex;justify-content:space-between;gap:20px;padding:12px 0;border-bottom:1px solid var(--line)}.summary-row:last-child{border:0}.summary-row span{color:var(--muted)}
-.success{display:none;text-align:center;padding:80px 20px}.success.show{display:block}.success .check{width:90px;height:90px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#102016;font-size:45px;margin:0 auto 25px}
-footer{padding:45px 0;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
-.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);background:#f5fff9;color:#102016;padding:13px 18px;border-radius:13px;font-weight:800;opacity:0;pointer-events:none;transition:.3s;z-index:100}.toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:850px){.hero-grid{grid-template-columns:1fr}.hero-card{display:none}.grid{grid-template-columns:1fr 1fr}.section{padding:75px 0}h1{letter-spacing:-2px}.section-head{display:block}.section-head p{margin-top:12px}}
-@media(max-width:560px){.grid,.fieldgrid{grid-template-columns:1fr}.hero{min-height:90vh}.navpill{display:none}.section-head h2{font-size:34px}.option{min-height:105px}.actions{position:sticky;bottom:0;background:rgba(7,17,15,.94);padding:12px 0;z-index:10}.hero p{font-size:16px}}
+:root{--brand:#17365d;--ok:#13795b;--danger:#b42318;--line:#d9e1ea;--muted:#667085;--bg:#f4f7fb}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#172033}
+header{background:var(--brand);color:#fff;padding:18px}.header-inner{max-width:1250px;margin:auto;display:flex;justify-content:space-between;gap:20px}.brand{font-weight:900;font-size:20px}.sub{font-size:12px;opacity:.85;margin-top:4px}
+.container{max-width:1250px;margin:18px auto;padding:0 14px}.nav{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:15px}.nav button{border:0;padding:11px 14px;border-radius:9px;background:#e7edf5;font-weight:800;cursor:pointer}.nav button.active{background:var(--brand);color:#fff}
+.section{display:none}.section.active{display:block}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:15px;box-shadow:0 2px 8px #1018280b}
+h2,h3{margin:0 0 10px}.muted{color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+label{display:block;font-size:13px;font-weight:800;margin-bottom:6px}input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit}textarea{min-height:80px}
+.btn{border:0;border-radius:9px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:var(--brand);color:#fff}.success{background:var(--ok);color:#fff}.danger{background:var(--danger);color:#fff}.secondary{background:#eaf0f6;color:#172033}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.status{display:none;padding:11px;border-radius:9px;margin-top:10px;font-size:13px}.status.show{display:block}.status.success{background:#ecfdf3;color:#027a48}.status.error{background:#fef3f2;color:#b42318}.status.info{background:#eff8ff;color:#175cd3}.status.warn{background:#fffaeb;color:#b54708}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:9px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.table th{background:#f8fafc}
+.vehicle-card{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}.vehicle-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.badge{padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;background:#eef2ff;color:#3730a3}
+.check{border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:13px}.choice{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0}.choice label{display:flex;align-items:center;gap:6px;font-weight:600}.choice input{width:auto}
+.parts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.part{display:flex;gap:7px;align-items:center;border:1px solid var(--line);padding:8px;border-radius:8px;font-size:13px}.part input{width:auto}
+.media-box{margin-top:10px;padding:10px;border-radius:9px;background:#f8fafc;border:1px dashed var(--line)}.media-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.media-item{width:125px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}.media-item img,.media-item video{width:100%;height:85px;object-fit:cover;display:block}.media-item div{padding:5px;font-size:11px;display:flex;justify-content:space-between;gap:4px}.smallbtn{border:0;background:none;color:var(--danger);font-weight:800;cursor:pointer}
+.stat{padding:15px;border:1px solid var(--line);border-radius:12px;background:#fff}.stat .num{font-size:27px;font-weight:900;margin-top:5px}.stat .lbl{font-size:12px;color:var(--muted)}
+.transfer-row{display:grid;grid-template-columns:1.2fr .7fr 2fr auto;gap:8px;align-items:end;margin-top:8px}.total-box{background:#111827;color:#fff;border-radius:12px;padding:16px;margin-top:14px}.total-box strong{font-size:25px}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:15px;z-index:50}.modal.show{display:flex}.modal-card{background:#fff;border-radius:15px;padding:20px;max-width:520px;width:100%;box-shadow:0 15px 50px #0005}
+.chart{overflow:auto;border:1px solid var(--line);border-radius:10px;padding:10px}.chart table{border-collapse:collapse;width:100%;font-size:12px}.chart th,.chart td{padding:6px 8px;border:1px solid var(--line);text-align:center}.chart th:first-child,.chart td:first-child{text-align:left;white-space:nowrap}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
+@media(max-width:800px){.grid,.grid3,.parts{grid-template-columns:1fr 1fr}.transfer-row{grid-template-columns:1fr 1fr}.header-inner{display:block}}
+@media(max-width:520px){.grid,.grid3,.parts{grid-template-columns:1fr}.transfer-row{grid-template-columns:1fr}.card{padding:13px}}
 </style>
 </head>
 <body>
-
-<section class="hero">
-<nav><div class="logo">TRIP<span>CRAFT</span> INDIA</div><div class="navpill">PERSONALISED INDIA TRAVEL</div></nav>
-<div class="wrap hero-grid">
-  <div>
-    <div class="kicker">YOUR JOURNEY • YOUR WAY</div>
-    <h1>Tell us your dream. We'll shape the trip.</h1>
-    <p>Build your India trip requirement in a few simple swipes. Choose your destination, days, travellers, style and budget — then send it directly to your trip coordinator.</p>
-    <button class="cta" onclick="document.getElementById('planner').scrollIntoView({behavior:'smooth'})">START PLANNING <span>→</span></button>
-  </div>
-  <div class="hero-card"><div class="visual"><div><small>DISCOVER • EXPERIENCE • REMEMBER</small><h3>India is waiting.</h3></div></div></div>
+<header><div class="header-inner"><div><div class="brand">INCHEON KIA • TEST DRIVE AUDIT PORTAL</div><div class="sub">Phase 3 — Vehicle Audit • Evidence • Closing • Dashboard • Reports</div></div><div class="sub">Central TD Audit System</div></div></header>
+<main class="container">
+<div class="nav">
+<button class="active" onclick="showSection('searchSection',this)">Vehicle Search</button>
+<button onclick="showSection('branchSection',this)">Branches</button>
+<button onclick="showSection('auditSection',this)">Start Audit</button>
+<button onclick="showSection('historySection',this)">Audit History</button>
+<button onclick="showSection('closingSection',this)">Branch Audit Closing</button>
+<button onclick="showSection('dashboardSection',this)">Dashboard</button>
+<button onclick="showSection('adminSection',this)">Admin</button>
 </div>
-</section>
 
-<div class="progress-wrap"><div class="progress" id="progress"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+<section id="searchSection" class="section active"><div class="card">
+<h2>Search TD Vehicle</h2><div class="muted">Search by vehicle number. A vehicle-details popup appears before the audit starts.</div>
+<div class="grid" style="margin-top:12px"><div><label>Vehicle Number</label><input id="vehicleNumber" placeholder="KL01AB1234" onkeydown="if(event.key==='Enter')searchVehicle()"></div><div style="align-self:end"><div class="actions"><button class="btn primary" onclick="searchVehicle()">SEARCH VEHICLE</button><button class="btn secondary" onclick="clearSearch()">CLEAR</button></div></div></div>
+<div id="searchStatus" class="status"></div><div id="vehicleResult"></div>
+</div></section>
 
-<main id="planner" class="section">
-<div class="wrap">
-  <div class="section-head"><div><div class="kicker">TRIP BUILDER</div><h2>Create your trip</h2></div><p>There are no complicated forms here. Pick what suits you and we'll use the details to prepare a suitable trip plan.</p></div>
+<section id="branchSection" class="section"><div class="card">
+<h2>Branch-wise TD Vehicles</h2><div class="grid"><div><label>Branch</label><select id="branchSelect"></select></div><div style="align-self:end"><button class="btn primary" onclick="loadBranchVehicles()">LOAD VEHICLES</button></div></div>
+<div id="branchStatus" class="status"></div><div id="branchResults" style="display:none;margin-top:14px"><h3 id="branchCount"></h3><div class="table-wrap"><table class="table"><thead><tr><th>Vehicle</th><th>Name</th><th>Variant</th><th>Fuel</th><th>Branch</th><th></th></tr></thead><tbody id="branchTableBody"></tbody></table></div></div>
+</div></section>
 
-  <form id="tripForm" onsubmit="return false">
-    <div class="step active" data-step="1">
-      <div class="kicker">01 / DESTINATION</div><h2>Where do you want to go?</h2><br>
-      <div class="grid destination">
-        <button type="button" class="option" data-group="destination" data-value="Kerala"><div class="icon">🌴</div><b>Kerala</b><small>Backwaters, hills, beaches & culture</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Goa"><div class="icon">🏖️</div><b>Goa</b><small>Beaches, sunsets & coastal life</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Kashmir"><div class="icon">🏔️</div><b>Kashmir</b><small>Valleys, lakes & mountain escapes</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Rajasthan"><div class="icon">🏰</div><b>Rajasthan</b><small>Forts, palaces & desert journeys</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Himachal Pradesh"><div class="icon">⛰️</div><b>Himachal Pradesh</b><small>Mountains, valleys & adventure</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Tamil Nadu"><div class="icon">🛕</div><b>Tamil Nadu</b><small>Temples, heritage & southern India</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Karnataka"><div class="icon">🌿</div><b>Karnataka</b><small>Nature, heritage & city breaks</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Northeast India"><div class="icon">🌄</div><b>Northeast India</b><small>Scenic landscapes & unique culture</small></button>
-        <button type="button" class="option" data-group="destination" data-value="Other / Multiple destinations"><div class="icon">✨</div><b>Other / Multiple</b><small>Tell us in the next step</small></button>
-      </div>
-      <div class="actions"><span></span><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
-    </div>
+<section id="auditSection" class="section"><div class="card"><h2>Start TD Vehicle Audit</h2><div id="selectedVehicleBox" class="status info show">Select a vehicle from Search or Branches.</div>
+<div id="auditForm" style="display:none">
+<div class="vehicle-card"><div class="vehicle-head"><div><strong id="auditVehicleNumber"></strong><div class="muted" id="auditVehicleMeta"></div></div><span class="badge">NEW AUDIT</span></div></div>
 
-    <div class="step" data-step="2">
-      <div class="kicker">02 / DURATION</div><h2>How many days?</h2><br>
-      <div class="grid">
-        <button type="button" class="option" data-group="days" data-value="2–3 Days"><b>2–3 Days</b><small>Quick escape</small></button>
-        <button type="button" class="option" data-group="days" data-value="4–5 Days"><b>4–5 Days</b><small>Short holiday</small></button>
-        <button type="button" class="option" data-group="days" data-value="6–7 Days"><b>6–7 Days</b><small>Classic getaway</small></button>
-        <button type="button" class="option" data-group="days" data-value="8–10 Days"><b>8–10 Days</b><small>Explore deeper</small></button>
-        <button type="button" class="option" data-group="days" data-value="11–14 Days"><b>11–14 Days</b><small>Big journey</small></button>
-        <button type="button" class="option" data-group="days" data-value="15+ Days"><b>15+ Days</b><small>Long adventure</small></button>
-      </div>
-      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
-    </div>
+<div class="check"><h3>1. ODO METER VARIATION WITH LOG BOOK</h3><div class="grid">
+<div><label>Log Book Kilometer</label><input id="logBookKm" type="number" min="0" step="1" oninput="calcKm()"></div>
+<div><label>Odometer Kilometer</label><input id="odometerKm" type="number" min="0" step="1" oninput="calcKm()"></div>
+</div><div class="grid" style="margin-top:10px"><div><label>Difference / Variation (Odometer − Log Book)</label><input id="kmDifference" readonly></div><div><label>Variation Status</label><div id="kmStatus" class="status info show">Enter both kilometer values.</div></div></div>
+<div class="choice"><label><input type="radio" name="odo" value="Yes" onchange="toggleBlock('odoIssue',true)"> Yes</label><label><input type="radio" name="odo" value="No" onchange="toggleBlock('odoIssue',false)"> No</label></div>
+<div id="odoIssue" style="display:none"><label>Remarks</label><textarea id="odoRemarks"></textarea><div id="media_odo"></div></div></div>
 
-    <div class="step" data-step="3">
-      <div class="kicker">03 / TRAVELLERS</div><h2>Who's travelling?</h2><br>
-      <div class="fieldgrid">
-        <div class="field"><label>Adults</label><input id="adults" type="number" min="1" value="2"></div>
-        <div class="field"><label>Children</label><input id="children" type="number" min="0" value="0"></div>
-      </div>
-      <div class="grid">
-        <button type="button" class="option" data-group="tripType" data-value="Family"><div class="icon">👨‍👩‍👧‍👦</div><b>Family</b></button>
-        <button type="button" class="option" data-group="tripType" data-value="Couple"><div class="icon">❤️</div><b>Couple</b></button>
-        <button type="button" class="option" data-group="tripType" data-value="Friends"><div class="icon">🧑‍🤝‍🧑</div><b>Friends</b></button>
-        <button type="button" class="option" data-group="tripType" data-value="Solo"><div class="icon">🎒</div><b>Solo</b></button>
-        <button type="button" class="option" data-group="tripType" data-value="Honeymoon"><div class="icon">💍</div><b>Honeymoon</b></button>
-        <button type="button" class="option" data-group="tripType" data-value="Adventure"><div class="icon">🧗</div><b>Adventure</b></button>
-      </div>
-      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
-    </div>
+<div class="check"><h3>2. SCRATCHES / DENT / PAINT PROBLEM</h3><div class="choice"><label><input type="radio" name="damage" value="Yes" onchange="toggleBlock('damageIssue',true);renderPartMedia()"> Yes</label><label><input type="radio" name="damage" value="No" onchange="toggleBlock('damageIssue',false);renderPartMedia()"> No</label></div>
+<div id="damageIssue" style="display:none"><label>Select all affected outer body parts</label><div id="parts" class="parts"></div><div id="partMediaArea"></div></div></div>
 
-    <div class="step" data-step="4">
-      <div class="kicker">04 / BUDGET</div><h2>What is your trip budget?</h2><br>
-      <div class="grid">
-        <button type="button" class="option" data-group="budget" data-value="Below ₹20,000"><b>Below ₹20,000</b><small>Budget escape</small></button>
-        <button type="button" class="option" data-group="budget" data-value="₹20,000 – ₹40,000"><b>₹20K – ₹40K</b><small>Value travel</small></button>
-        <button type="button" class="option" data-group="budget" data-value="₹40,000 – ₹75,000"><b>₹40K – ₹75K</b><small>Comfort travel</small></button>
-        <button type="button" class="option" data-group="budget" data-value="₹75,000 – ₹1.5 Lakh"><b>₹75K – ₹1.5L</b><small>Premium travel</small></button>
-        <button type="button" class="option" data-group="budget" data-value="₹1.5 Lakh+"><b>₹1.5 Lakh+</b><small>Luxury & premium</small></button>
-        <button type="button" class="option" data-group="budget" data-value="Custom budget"><b>Custom</b><small>Tell us your amount</small></button>
-      </div>
-      <div class="field" style="margin-top:18px"><label>Custom budget / details (optional)</label><input id="customBudget" placeholder="Example: ₹65,000 for 4 people"></div>
-      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
-    </div>
+<div class="check"><h3>3. VEHICLE CONDITION</h3><div class="choice"><label><input type="radio" name="condition" value="Clean" onchange="renderConditionMedia()"> Clean</label><label><input type="radio" name="condition" value="Not Clean" onchange="renderConditionMedia()"> Not Clean</label></div><div id="conditionMedia"></div></div>
 
-    <div class="step" data-step="5">
-      <div class="kicker">05 / REQUIREMENTS</div><h2>What should we arrange?</h2><br>
-      <div class="grid">
-        <button type="button" class="option multi" data-group="requirements" data-value="Hotels"><div class="icon">🏨</div><b>Hotels</b></button>
-        <button type="button" class="option multi" data-group="requirements" data-value="Transportation"><div class="icon">🚗</div><b>Transportation</b></button>
-        <button type="button" class="option multi" data-group="requirements" data-value="Sightseeing"><div class="icon">📸</div><b>Sightseeing</b></button>
-        <button type="button" class="option multi" data-group="requirements" data-value="Food"><div class="icon">🍽️</div><b>Food</b></button>
-        <button type="button" class="option multi" data-group="requirements" data-value="Airport / Railway Pickup"><div class="icon">🛬</div><b>Pickup / Drop</b></button>
-        <button type="button" class="option multi" data-group="requirements" data-value="Tour Guide"><div class="icon">🧭</div><b>Tour Guide</b></button>
-      </div>
-      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Continue →</button></div>
-    </div>
+<div class="check"><h3>4. SPARE WHEEL</h3><div class="choice"><label><input type="radio" name="spare" value="Yes" onchange="renderSpareMedia()"> Yes</label><label><input type="radio" name="spare" value="No" onchange="renderSpareMedia()"> No</label></div><div id="spareMedia"></div></div>
 
-    <div class="step" data-step="6">
-      <div class="kicker">06 / TRAVEL DATE & START</div><h2>When and from where?</h2><br>
-      <div class="fieldgrid">
-        <div class="field"><label>Preferred travel date</label><input id="travelDate" type="date"></div>
-        <div class="field"><label>Starting city / location</label><input id="startLocation" placeholder="Example: Kochi"></div>
-      </div>
-      <div class="field"><label>Anything else we should know?</label><textarea id="message" placeholder="Special requests, hotel preference, places you want to visit, etc."></textarea></div>
-      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" type="button" onclick="nextStep()">Review trip →</button></div>
-    </div>
+<div class="check"><h3>5. OTHER ISSUE</h3><div class="choice"><label><input type="radio" name="other" value="Yes" onchange="toggleBlock('otherIssue',true)"> Yes</label><label><input type="radio" name="other" value="No" onchange="toggleBlock('otherIssue',false)"> No</label></div><div id="otherIssue" style="display:none"><label>Remarks</label><textarea id="otherRemarks"></textarea><div id="media_other"></div></div></div>
 
-    <div class="step" data-step="7">
-      <div class="kicker">07 / YOUR DETAILS</div><h2>Where can we contact you?</h2><br>
-      <div class="fieldgrid">
-        <div class="field"><label>Full name *</label><input id="name" required placeholder="Your name"></div>
-        <div class="field"><label>WhatsApp number *</label><input id="phone" required inputmode="tel" placeholder="10-digit mobile number"></div>
-        <div class="field"><label>Email (optional)</label><input id="email" type="email" placeholder="you@example.com"></div>
-      </div>
-      <div class="summary" id="summary"></div>
-      <div class="actions"><button class="btn" type="button" onclick="prevStep()">← Back</button><button class="btn primary" id="submitBtn" type="button" onclick="submitTrip()">SEND MY TRIP REQUEST ✈️</button></div>
-    </div>
-  </form>
+<div class="check"><h3>6. AUDITOR DETAILS</h3><div class="grid"><div><label>Auditor Name</label><input id="auditorName"></div><div><label>Employee ID</label><input id="auditorId"></div></div></div>
+<div id="auditStatus" class="status"></div><div class="actions"><button class="btn success" id="submitAuditBtn" onclick="submitAudit()">SUBMIT FULL AUDIT</button><button class="btn secondary" onclick="resetAudit()">RESET</button></div>
+</div></div></section>
 
-  <div class="success" id="success">
-    <div class="check">✓</div><h2>Trip request received!</h2>
-    <p style="color:var(--muted);max-width:600px;margin:18px auto;line-height:1.7">Your requirement has been prepared. Your trip coordinator can now contact you and build your India journey.</p>
-    <button class="cta" onclick="location.reload()">PLAN ANOTHER TRIP</button>
-  </div>
+<section id="historySection" class="section"><div class="card"><h2>Audit History</h2><div class="grid"><div><label>Vehicle Number (optional)</label><input id="historyVehicle"></div><div><label>Branch</label><select id="historyBranch"></select></div></div><div class="actions"><button class="btn primary" onclick="loadHistory()">LOAD HISTORY</button><button class="btn secondary" onclick="loadReportLinks()">SHOW REPORTS</button></div><div id="historyStatus" class="status"></div><div id="historyResults"></div><div id="reportLinksHistory"></div></div></section>
+
+<section id="closingSection" class="section"><div class="card"><h2>Branch Audit Closing / TD Stock Reconciliation</h2><div class="muted">All status categories must equal TOTAL TEST DRIVE before submission.</div>
+<div class="grid" style="margin-top:12px"><div><label>Branch</label><select id="closingBranch"></select></div><div><label>Audit Date</label><input id="closingDate" type="date"></div></div>
+<div class="grid3" style="margin-top:12px">
+<div class="stat"><label>TOTAL TEST DRIVE</label><input id="totalTD" type="number" min="0" oninput="recalcClosing()"></div>
+<div class="stat"><label>IN SHOWROOM</label><input id="inShowroom" type="number" min="0" oninput="recalcClosing()"></div>
+<div class="stat"><label>OUT FOR TEST DRIVE</label><input id="outTD" type="number" min="0" oninput="recalcClosing()"></div>
+<div class="stat"><label>UNDER WASHING</label><input id="underWashing" type="number" min="0" oninput="recalcClosing()"></div>
+<div class="stat"><label>UNDER BODY SHOP</label><input id="underBodyShop" type="number" min="0" oninput="recalcClosing()"></div>
+<div class="stat"><label>TRANSFER TO OTHER SHOWROOMS</label><input id="transferTotal" type="number" min="0" readonly></div>
 </div>
+<div id="transferRows"></div><div class="actions"><button class="btn secondary" onclick="addTransferRow()">+ ADD TRANSFER SHOWROOM</button></div>
+<div class="total-box"><div>ACCOUNTED VEHICLES</div><strong id="accountedTotal">0</strong><div id="balanceText" style="margin-top:7px">Enter the figures above.</div></div>
+<div class="grid" style="margin-top:12px"><div><label>Auditor Name</label><input id="closingAuditor"></div><div><label>Employee ID</label><input id="closingAuditorId"></div></div>
+<label style="margin-top:12px">Remarks</label><textarea id="closingRemarks"></textarea>
+<div id="closingStatus" class="status"></div><div class="actions"><button class="btn success" onclick="submitBranchClosing()">SAVE BRANCH AUDIT CLOSING</button><button class="btn secondary" onclick="resetClosing()">RESET</button></div>
+</div></section>
+
+<section id="dashboardSection" class="section"><div class="card"><h2>TD Audit Dashboard</h2><div id="dashboardLock" class="status warn show">Dashboard is locked. Admin login is required.</div><div id="dashboardContent" style="display:none">
+<div class="grid3" id="dashStats"></div><div class="actions"><button class="btn primary" onclick="loadDashboard()">REFRESH DASHBOARD</button><button class="btn secondary" onclick="generateReports()">GENERATE GOOGLE SHEET + EXCEL + PDF</button></div>
+<div id="dashStatus" class="status"></div><h3 style="margin-top:18px">Branch Summary</h3><div id="branchDashboard"></div><h3 style="margin-top:18px">Daily Branch-wise Auditor Login / Attendance</h3><div id="attendanceChart" class="chart"></div><div id="dashboardReports"></div>
+</div></div></section>
+
+<section id="adminSection" class="section"><div class="card"><h2>Admin / Vehicle Database</h2><div class="muted">Separate admin username and password protect Dashboard, reports and database changes.</div>
+<div id="adminLock"><div class="grid" style="margin-top:12px"><div><label>Admin Username</label><input id="adminUsername"></div><div><label>Admin Password</label><input id="adminPassword" type="password"></div></div><div class="actions"><button class="btn primary" onclick="unlockAdmin()">UNLOCK ADMIN</button></div><div id="adminLoginStatus" class="status"></div></div>
+<div id="adminContent" style="display:none;margin-top:15px"><div class="actions"><button class="btn secondary" onclick="lockAdmin()">LOCK ADMIN</button></div>
+<div class="card"><h3>Add Branch</h3><div class="grid"><div><label>Branch Name</label><input id="newBranch"></div><div style="align-self:end"><button class="btn success" onclick="addBranch()">ADD BRANCH</button></div></div><div id="addBranchStatus" class="status"></div></div>
+<div class="card"><h3>Add TD Vehicle</h3><div class="grid3"><div><label>Vehicle Number</label><input id="addVehicleNumber"></div><div><label>Vehicle Name</label><input id="addVehicleName"></div><div><label>Variant</label><input id="addVariant"></div><div><label>Fuel</label><select id="addFuel"><option value="">Select</option><option>PETROL</option><option>DIESEL</option><option>CNG</option><option>ELECTRIC</option><option>HYBRID</option></select></div><div><label>Branch</label><select id="addBranchSelect"></select></div></div><div class="actions"><button class="btn success" onclick="addVehicle()">ADD VEHICLE</button></div><div id="addVehicleStatus" class="status"></div></div>
+</div></div></section>
 </main>
+<footer>INCHEON KIA • TD Vehicle Audit Portal • Phase 3</footer>
 
-<footer><div class="wrap"><div class="logo">TRIP<span>CRAFT</span> INDIA</div><br>Personalised trip planning for journeys across India.</div></footer>
-<div class="toast" id="toast"></div>
+<div id="vehicleModal" class="modal"><div class="modal-card"><h2>Vehicle Details</h2><div id="modalVehicle"></div><div class="actions"><button class="btn success" onclick="confirmVehicleAudit()">START AUDIT</button><button class="btn secondary" onclick="closeVehicleModal()">CANCEL</button></div></div></div>
+<input id="photoInput" type="file" accept="image/*" capture="environment" style="display:none">
+<input id="videoInput" type="file" accept="video/*" capture="environment" style="display:none">
+<input id="fileInput" type="file" multiple style="display:none">
 
 <script>
-/* ================= BUSINESS SETTINGS ================= */
-const CONFIG = {
-  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycby4lq4Q8N_SD3tyz3MPO75KLnD2G3Ija2x9c6CapX-_ABPdFamhElKLIIqkL1yH_zYk/exec",
-  SELLER_WHATSAPP: "917356828624" // Example: 919876543210
-};
-/* ===================================================== */
+const GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/AKfycbzR6fFUpewGBnASPteL7n6uJ4m6GBWk43iTwjcRVH3Ckh_KdDydY0uTkAXf7jor-WZ2/exec";
+const ADMIN_KEY="tdAuditAdminV3";
+let adminSession=JSON.parse(sessionStorage.getItem(ADMIN_KEY)||"null");
+let selectedVehicle=null, pendingVehicle=null, mediaStore={odo:[],spare:[],condition:[],other:[],parts:{}}, mediaTarget=null;
+const BODY_PARTS=["Front Bumper","Rear Bumper","Bonnet","Roof","Front Left Fender","Front Right Fender","Rear Left Quarter Panel","Rear Right Quarter Panel","Front Left Door","Front Right Door","Rear Left Door","Rear Right Door","Left ORVM","Right ORVM","Front Windshield","Rear Windshield","Left Side Glass","Right Side Glass","Tailgate / Boot","Headlamp LH","Headlamp RH","Tail Lamp LH","Tail Lamp RH","Alloy / Wheel LH","Alloy / Wheel RH","Other Body Area"];
 
-let step=1;
-const data={destination:"",days:"",tripType:"",budget:"",requirements:[],adults:2,children:0};
-
-document.querySelectorAll(".option").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const group=btn.dataset.group, value=btn.dataset.value;
-    if(group==="requirements"){
-      btn.classList.toggle("selected");
-      data.requirements=[...document.querySelectorAll('.option[data-group="requirements"].selected')].map(x=>x.dataset.value);
-    }else{
-      document.querySelectorAll(`.option[data-group="${group}"]`).forEach(x=>x.classList.remove("selected"));
-      btn.classList.add("selected"); data[group]=value;
-    }
-    if(group==="destination" && value==="Other / Multiple destinations"){
-      showToast("You can describe your destinations in the final message.");
-    }
-    if(step===7) buildSummary();
-  });
-});
-
-function showToast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),2600)}
-function validateStep(){
-  if(step===1&&!data.destination){showToast("Please select a destination.");return false}
-  if(step===2&&!data.days){showToast("Please select trip duration.");return false}
-  if(step===3){
-    data.adults=Math.max(1,parseInt(document.getElementById("adults").value)||1);
-    data.children=Math.max(0,parseInt(document.getElementById("children").value)||0);
-    if(!data.tripType){showToast("Please select your trip style.");return false}
-  }
-  if(step===4&&!data.budget){showToast("Please select a budget.");return false}
-  if(step===5&&data.requirements.length===0){showToast("Select at least one requirement.");return false}
-  return true;
-}
-function nextStep(){if(!validateStep())return;step=Math.min(7,step+1);renderStep()}
-function prevStep(){step=Math.max(1,step-1);renderStep()}
-function renderStep(){
-  document.querySelectorAll(".step").forEach(x=>x.classList.toggle("active",+x.dataset.step===step));
-  document.querySelectorAll("#progress span").forEach((x,i)=>x.classList.toggle("active",i<step));
-  if(step===7)buildSummary();
-  document.getElementById("planner").scrollIntoView({behavior:"smooth",block:"start"});
-}
-function buildSummary(){
-  const custom=document.getElementById("customBudget").value.trim();
-  const budget=data.budget+(custom?` — ${custom}`:"");
-  document.getElementById("summary").innerHTML=`
-    <div class="summary-row"><span>Destination</span><strong>${esc(data.destination)}</strong></div>
-    <div class="summary-row"><span>Duration</span><strong>${esc(data.days)}</strong></div>
-    <div class="summary-row"><span>Travellers</span><strong>${data.adults} Adults · ${data.children} Children</strong></div>
-    <div class="summary-row"><span>Trip style</span><strong>${esc(data.tripType)}</strong></div>
-    <div class="summary-row"><span>Budget</span><strong>${esc(budget)}</strong></div>
-    <div class="summary-row"><span>Requirements</span><strong>${esc(data.requirements.join(", "))}</strong></div>
-    <div class="summary-row"><span>Travel date</span><strong>${esc(document.getElementById("travelDate").value||"Flexible")}</strong></div>
-    <div class="summary-row"><span>Starting point</span><strong>${esc(document.getElementById("startLocation").value||"Not specified")}</strong></div>`;
-}
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function status(id,msg,type){const e=document.getElementById(id);if(!e)return;e.textContent=msg;e.className="status show "+type}
+function hide(id){const e=document.getElementById(id);if(e)e.className="status"}
+function checkApi(){return !GOOGLE_SCRIPT_URL.includes("PASTE_YOUR")}
+function apiGet(p){return fetch(GOOGLE_SCRIPT_URL+"?"+new URLSearchParams(p)).then(r=>r.json())}
+function apiPost(p){return fetch(GOOGLE_SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(p)}).then(r=>r.json())}
+function showSection(id,btn){document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));document.getElementById(id).classList.add("active");if(btn)btn.classList.add("active");if(["branchSection","historySection","closingSection","adminSection"].includes(id))loadBranches();if(id==="dashboardSection"){if(adminSession)loadDashboard();else lockDashboard()}}
+async function loadBranches(){try{const d=await apiGet({action:"getBranches"});if(!d.success)throw Error(d.message);["branchSelect","historyBranch","closingBranch","addBranchSelect"].forEach(id=>{const e=document.getElementById(id);if(!e)return;const first=id==="historyBranch"?"<option value=''>All Branches</option>":"<option value=''>Select Branch</option>";e.innerHTML=first+(d.branches||[]).map(b=>`<option value="${esc(b)}">${esc(b)}</option>`).join("")})}catch(e){status("branchStatus",e.message,"error")}}
 
-async function submitTrip(){
-  const name=document.getElementById("name").value.trim();
-  const phone=document.getElementById("phone").value.replace(/\D/g,"");
-  if(!name){showToast("Please enter your name.");return}
-  if(phone.length<10){showToast("Please enter a valid WhatsApp number.");return}
-  if(!CONFIG.APPS_SCRIPT_URL || CONFIG.APPS_SCRIPT_URL.includes("PASTE_YOUR")){
-    showToast("Add your Apps Script Web App URL in CONFIG first.");return
-  }
-  if(!CONFIG.SELLER_WHATSAPP || CONFIG.SELLER_WHATSAPP.includes("XXXXXXXX")){
-    showToast("Add your WhatsApp number in CONFIG first.");return
-  }
-  data.adults=Math.max(1,parseInt(document.getElementById("adults").value)||1);
-  data.children=Math.max(0,parseInt(document.getElementById("children").value)||0);
-  const custom=document.getElementById("customBudget").value.trim();
-  const payload={
-    name,phone,email:document.getElementById("email").value.trim(),
-    destination:data.destination,days:data.days,adults:data.adults,children:data.children,
-    tripType:data.tripType,budget:data.budget,customBudget:custom,
-    requirements:data.requirements.join(", "),travelDate:document.getElementById("travelDate").value,
-    startLocation:document.getElementById("startLocation").value.trim(),
-    message:document.getElementById("message").value.trim()
-  };
-  const btn=document.getElementById("submitBtn");btn.disabled=true;btn.textContent="SENDING REQUEST…";
-  try{
-    await fetch(CONFIG.APPS_SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
-  }catch(e){console.log(e)}
-  const wa=`🌍 *NEW INDIA TRIP REQUEST*%0A%0A👤 *Customer:* ${encodeURIComponent(payload.name)}%0A📱 *WhatsApp:* ${encodeURIComponent(payload.phone)}%0A📍 *Destination:* ${encodeURIComponent(payload.destination)}%0A🗓️ *Duration:* ${encodeURIComponent(payload.days)}%0A👨‍👩‍👧 *Travellers:* ${payload.adults} Adults, ${payload.children} Children%0A❤️ *Trip Style:* ${encodeURIComponent(payload.tripType)}%0A💰 *Budget:* ${encodeURIComponent(payload.budget+(payload.customBudget?" — "+payload.customBudget:""))}%0A🏨 *Requirements:* ${encodeURIComponent(payload.requirements)}%0A📅 *Travel Date:* ${encodeURIComponent(payload.travelDate||"Flexible")}%0A🚩 *Starting From:* ${encodeURIComponent(payload.startLocation||"Not specified")}%0A📝 *Message:* ${encodeURIComponent(payload.message||"None")}`;
-  document.getElementById("tripForm").style.display="none";
-  document.getElementById("success").classList.add("show");
-  setTimeout(()=>window.open(`https://wa.me/${CONFIG.SELLER_WHATSAPP}?text=${wa}`,"_blank"),500);
-}
-document.getElementById("travelDate").min=new Date().toISOString().split("T")[0];
+async function searchVehicle(){const n=document.getElementById("vehicleNumber").value.trim();if(!n)return status("searchStatus","Enter a vehicle number.","error");try{hide("searchStatus");const d=await apiGet({action:"searchVehicle",vehicleNumber:n});if(!d.success)return status("searchStatus",d.message,"error");pendingVehicle=d.vehicle;document.getElementById("vehicleResult").innerHTML=`<div class="vehicle-card"><div class="vehicle-head"><div><strong>${esc(d.vehicle.vehicleNumber)}</strong><div class="muted">${esc(d.vehicle.vehicleName)} • ${esc(d.vehicle.variant)} • ${esc(d.vehicle.fuel)} • ${esc(d.vehicle.branch)}</div></div><button class="btn success" onclick="openVehicleModal()">VIEW DETAILS / START</button></div></div>`}catch(e){status("searchStatus",e.message,"error")}}
+function clearSearch(){document.getElementById("vehicleNumber").value="";document.getElementById("vehicleResult").innerHTML="";hide("searchStatus")}
+function openVehicleModal(){if(!pendingVehicle)return;document.getElementById("modalVehicle").innerHTML=`<div class="vehicle-card"><p><b>Vehicle Number:</b> ${esc(pendingVehicle.vehicleNumber)}</p><p><b>Vehicle Name:</b> ${esc(pendingVehicle.vehicleName)}</p><p><b>Variant:</b> ${esc(pendingVehicle.variant)}</p><p><b>Fuel:</b> ${esc(pendingVehicle.fuel)}</p><p><b>Branch:</b> ${esc(pendingVehicle.branch)}</p></div>`;document.getElementById("vehicleModal").classList.add("show")}
+function closeVehicleModal(){document.getElementById("vehicleModal").classList.remove("show")}
+function confirmVehicleAudit(){selectedVehicle=pendingVehicle;closeVehicleModal();startAudit()}
+async function loadBranchVehicles(){const b=document.getElementById("branchSelect").value;if(!b)return status("branchStatus","Select a branch.","error");try{const d=await apiGet({action:"getVehiclesByBranch",branch:b});if(!d.success)throw Error(d.message);document.getElementById("branchResults").style.display="block";document.getElementById("branchCount").textContent=`Total vehicles in ${b}: ${d.count}`;document.getElementById("branchTableBody").innerHTML=(d.vehicles||[]).map((v,i)=>`<tr><td>${esc(v.vehicleNumber)}</td><td>${esc(v.vehicleName)}</td><td>${esc(v.variant)}</td><td>${esc(v.fuel)}</td><td>${esc(v.branch)}</td><td><button class="btn success" onclick="branchVehicle(${i})">AUDIT</button></td></tr>`).join("");window._branchVehicles=d.vehicles||[]}catch(e){status("branchStatus",e.message,"error")}}
+function branchVehicle(i){pendingVehicle=window._branchVehicles[i];openVehicleModal()}
+function startAudit(){document.getElementById("auditForm").style.display="block";document.getElementById("selectedVehicleBox").textContent=`Selected: ${selectedVehicle.vehicleNumber} — ${selectedVehicle.vehicleName} — ${selectedVehicle.branch}`;document.getElementById("auditVehicleNumber").textContent=selectedVehicle.vehicleNumber;document.getElementById("auditVehicleMeta").textContent=`${selectedVehicle.vehicleName} • ${selectedVehicle.variant} • ${selectedVehicle.fuel} • ${selectedVehicle.branch}`;buildParts();resetAudit(false);document.querySelectorAll(".nav button").forEach(b=>{if(b.textContent==="Start Audit")b.click()});window.scrollTo({top:0,behavior:"smooth"});apiPost({action:"recordAttendance",branch:selectedVehicle.branch,auditorName:document.getElementById("auditorName").value||"Pending",employeeId:document.getElementById("auditorId").value||"Pending",attendanceAction:"VEHICLE_OPENED"}).catch(()=>{})}
+function toggleBlock(id,on){document.getElementById(id).style.display=on?"block":"none"}
+function radio(name){const e=document.querySelector(`input[name="${name}"]:checked`);return e?e.value:""}
+function calcKm(){const a=Number(document.getElementById("logBookKm").value),b=Number(document.getElementById("odometerKm").value),d=(a&&b)?b-a:"";document.getElementById("kmDifference").value=d;document.getElementById("kmStatus").textContent=(d==="")?"Enter both kilometer values.":(d===0?"No kilometer difference.":`Difference: ${d>0?"+":""}${d} km`)}
+function buildParts(){document.getElementById("parts").innerHTML=BODY_PARTS.map(p=>`<label class="part"><input type="checkbox" value="${esc(p)}" onchange="renderPartMedia()"> ${esc(p)}</label>`).join("")}
+function mediaButtons(key){return `<div class="actions"><button class="btn secondary" onclick="openMedia('${key}','photo')">TAKE PHOTO</button><button class="btn secondary" onclick="openMedia('${key}','video')">TAKE VIDEO</button><button class="btn secondary" onclick="openMedia('${key}','file')">ADD FILE</button></div><div class="media-row" id="mediaRow_${btoa(unescape(encodeURIComponent(key))).replace(/=/g,'')}"></div>`}
+function targetId(key){return btoa(unescape(encodeURIComponent(key))).replace(/=/g,'')}
+function renderMedia(key){const arr=mediaArray(key),el=document.getElementById("mediaRow_"+targetId(key));if(!el)return;el.innerHTML=arr.map((m,i)=>`<div class="media-item">${m.type.startsWith("video")?`<video src="${m.data}" controls></video>`:`<img src="${m.data}" alt="">`}<div><span>${esc(m.name).slice(0,18)}</span><button class="smallbtn" onclick="removeMedia('${key.replace(/'/g,"\\'")}',${i})">REMOVE</button></div></div>`).join("")}
+function mediaArray(key){if(key==="odo")return mediaStore.odo;if(key==="spare")return mediaStore.spare;if(key==="condition")return mediaStore.condition;if(key==="other")return mediaStore.other;if(key.startsWith("part:")){const p=key.slice(5);if(!mediaStore.parts[p])mediaStore.parts[p]=[];return mediaStore.parts[p]}return []}
+function addMedia(key,file){mediaArray(key).push(file);renderMedia(key)}
+function removeMedia(key,i){mediaArray(key).splice(i,1);renderMedia(key)}
+function renderSingleMedia(container,key){document.getElementById(container).innerHTML=`<div class="media-box"><b>Evidence</b>${mediaButtons(key)}</div>`;renderMedia(key)}
+function renderPartMedia(){const selected=[...document.querySelectorAll("#parts input:checked")].map(x=>x.value);document.getElementById("partMediaArea").innerHTML=selected.map(p=>`<div class="media-box"><b>${esc(p)}</b>${mediaButtons("part:"+p)}</div>`).join("");selected.forEach(p=>renderMedia("part:"+p))}
+function renderConditionMedia(){renderSingleMedia("conditionMedia","condition")}
+function renderSpareMedia(){renderSingleMedia("spareMedia","spare")}
+function openMedia(key,kind){mediaTarget=key;const el=document.getElementById(kind==="photo"?"photoInput":kind==="video"?"videoInput":"fileInput");el.value="";el.onchange=async()=>{for(const f of [...el.files]){try{addMedia(key,await fileToData(f))}catch(e){alert(e.message)}}};el.click()}
+function fileToData(f){return new Promise((resolve,reject)=>{if(f.size>25*1024*1024)reject(Error("File is larger than 25 MB. Use a shorter video or smaller file."));const r=new FileReader();r.onload=()=>resolve({name:f.name,type:f.type||"application/octet-stream",data:r.result});r.onerror=()=>reject(Error("Could not read file."));r.readAsDataURL(f)})}
+function collectAudit(){const damage=radio("damage"),parts=[...document.querySelectorAll("#parts input:checked")].map(x=>x.value),a={action:"submitAudit",vehicle:selectedVehicle,logBookKm:Number(document.getElementById("logBookKm").value)||0,odometerKm:Number(document.getElementById("odometerKm").value)||0,odoVariation:radio("odo"),odoRemarks:document.getElementById("odoRemarks").value.trim(),damage,damageParts:parts,vehicleCondition:radio("condition"),spareWheel:radio("spare"),otherIssue:radio("other"),otherRemarks:document.getElementById("otherRemarks").value.trim(),auditorName:document.getElementById("auditorName").value.trim(),auditorId:document.getElementById("auditorId").value.trim(),media:{odo:mediaStore.odo,spare:mediaStore.spare,condition:mediaStore.condition,other:mediaStore.other,parts:mediaStore.parts}};return a}
+async function submitAudit(){if(!selectedVehicle)return status("auditStatus","Select a vehicle first.","error");const a=collectAudit();if(!a.logBookKm||!a.odometerKm||!a.odoVariation||!a.damage||!a.vehicleCondition||!a.spareWheel||!a.otherIssue||!a.auditorName||!a.auditorId)return status("auditStatus","Complete kilometer, checklist and auditor fields.","error");if(a.odoVariation==="Yes"&&!a.odoRemarks)return status("auditStatus","Add odometer variation remarks.","error");if(a.damage==="Yes"&&!a.damageParts.length)return status("auditStatus","Select at least one affected body part.","error");if(a.otherIssue==="Yes"&&!a.otherRemarks)return status("auditStatus","Add other issue remarks.","error");const btn=document.getElementById("submitAuditBtn");btn.disabled=true;status("auditStatus","Saving audit and evidence. Please wait...","info");try{const d=await apiPost(a);if(!d.success)throw Error(d.message);status("auditStatus",`Audit saved: ${d.auditId}. Evidence files: ${d.mediaCount}`,"success");setTimeout(()=>resetAudit(true),1200)}catch(e){status("auditStatus","Could not save audit: "+e.message,"error")}finally{btn.disabled=false}}
+function resetAudit(clear=true){mediaStore={odo:[],spare:[],condition:[],other:[],parts:{}};document.querySelectorAll('#auditForm input[type="radio"],#auditForm input[type="checkbox"]').forEach(x=>x.checked=false);["logBookKm","odometerKm","kmDifference","odoRemarks","otherRemarks","auditorName","auditorId"].forEach(id=>document.getElementById(id).value="");["odoIssue","damageIssue","otherIssue"].forEach(id=>toggleBlock(id,false));document.getElementById("partMediaArea").innerHTML="";document.getElementById("conditionMedia").innerHTML="";document.getElementById("spareMedia").innerHTML="";document.getElementById("media_odo").innerHTML="";document.getElementById("media_other").innerHTML="";if(clear){selectedVehicle=null;document.getElementById("auditForm").style.display="none";document.getElementById("selectedVehicleBox").textContent="Select a vehicle from Search or Branches."}}
+async function loadHistory(){try{status("historyStatus","Loading history...","info");const d=await apiGet({action:"getAuditHistory",vehicleNumber:document.getElementById("historyVehicle").value.trim(),branch:document.getElementById("historyBranch").value});if(!d.success)throw Error(d.message);hide("historyStatus");const rs=d.records||[];document.getElementById("historyResults").innerHTML=rs.length?`<div class="table-wrap"><table class="table"><thead><tr><th>ID</th><th>Time</th><th>Vehicle</th><th>Branch</th><th>Auditor</th><th>Log KM</th><th>Odo KM</th><th>Diff</th><th>Variation</th><th>Damage</th><th>Condition</th><th>Spare</th><th>Other</th><th>Media</th></tr></thead><tbody>${rs.map(r=>`<tr><td>${esc(r.auditId)}</td><td>${esc(r.timestamp)}</td><td>${esc(r.vehicleNumber)}</td><td>${esc(r.branch)}</td><td>${esc(r.auditorName)}</td><td>${esc(r.logBookKm)}</td><td>${esc(r.odometerKm)}</td><td>${esc(r.kmDifference)}</td><td>${esc(r.odoVariation)}</td><td>${esc(r.damage)}</td><td>${esc(r.vehicleCondition)}</td><td>${esc(r.spareWheel)}</td><td>${esc(r.otherIssue)}</td><td>${esc(r.mediaCount)}</td></tr>`).join("")}</tbody></table></div>`:"<div class='muted'>No audit records found.</div>"}catch(e){status("historyStatus",e.message,"error")}}
+function addTransferRow(){const wrap=document.getElementById("transferRows"),row=document.createElement("div");row.className="transfer-row";row.innerHTML=`<div><label>Other Showroom</label><input class="trBranch"></div><div><label>Count</label><input class="trCount" type="number" min="0" value="0" oninput="syncTransferTotal()"></div><div><label>Details</label><input class="trDetails" placeholder="Vehicle numbers / reason"></div><button class="btn danger" onclick="this.parentElement.remove();syncTransferTotal()">REMOVE</button>`;wrap.appendChild(row);syncTransferTotal()}
+function syncTransferTotal(){let n=0;document.querySelectorAll(".trCount").forEach(e=>n+=Number(e.value)||0);document.getElementById("transferTotal").value=n;recalcClosing()}
+function recalcClosing(){const total=Number(document.getElementById("totalTD").value)||0,vals=["inShowroom","outTD","underWashing","underBodyShop","transferTotal"].map(id=>Number(document.getElementById(id).value)||0),accounted=vals.reduce((a,b)=>a+b,0),diff=accounted-total;document.getElementById("accountedTotal").textContent=accounted;document.getElementById("balanceText").textContent=!total?"Enter TOTAL TEST DRIVE.":diff===0?"BALANCED — Accounted count equals Total Test Drive.":diff>0?`OVER BY ${diff} VEHICLE(S) — CHECK.`:`SHORT BY ${Math.abs(diff)} VEHICLE(S) — CHECK.`}
+function transferDetails(){return [...document.querySelectorAll(".transfer-row")].map(r=>({showroom:r.querySelector(".trBranch").value.trim(),count:Number(r.querySelector(".trCount").value)||0,details:r.querySelector(".trDetails").value.trim()})).filter(x=>x.showroom||x.count||x.details)}
+async function submitBranchClosing(){const total=Number(document.getElementById("totalTD").value)||0,accounted=Number(document.getElementById("accountedTotal").textContent)||0;if(!document.getElementById("closingBranch").value||!document.getElementById("closingDate").value||!total||!document.getElementById("closingAuditor").value.trim()||!document.getElementById("closingAuditorId").value.trim())return status("closingStatus","Complete branch, date, total and auditor details.","error");if(accounted!==total)return status("closingStatus",`Cannot save: TOTAL ${total}, ACCOUNTED ${accounted}.`,"error");try{const d=await apiPost({action:"submitBranchClosing",branch:document.getElementById("closingBranch").value,auditDate:document.getElementById("closingDate").value,totalTD:total,inShowroom:Number(document.getElementById("inShowroom").value)||0,outForTestDrive:Number(document.getElementById("outTD").value)||0,underWashing:Number(document.getElementById("underWashing").value)||0,underBodyShop:Number(document.getElementById("underBodyShop").value)||0,transferToOtherShowrooms:Number(document.getElementById("transferTotal").value)||0,transferDetails:transferDetails(),auditorName:document.getElementById("closingAuditor").value.trim(),employeeId:document.getElementById("closingAuditorId").value.trim(),remarks:document.getElementById("closingRemarks").value.trim()});if(!d.success)throw Error(d.message);status("closingStatus","Branch closing saved: "+d.closingId,"success")}catch(e){status("closingStatus",e.message,"error")}}
+function resetClosing(){["closingDate","totalTD","inShowroom","outTD","underWashing","underBodyShop","transferTotal","closingAuditor","closingAuditorId","closingRemarks"].forEach(id=>document.getElementById(id).value="");document.getElementById("transferRows").innerHTML="";recalcClosing()}
+async function unlockAdmin(){const u=document.getElementById("adminUsername").value.trim(),p=document.getElementById("adminPassword").value;if(!u||!p)return status("adminLoginStatus","Enter username and password.","error");try{const d=await apiGet({action:"verifyAdmin",username:u,password:p});if(!d.success)return status("adminLoginStatus",d.message,"error");adminSession={username:u,password:p};sessionStorage.setItem(ADMIN_KEY,JSON.stringify(adminSession));showAdmin();loadDashboard();status("adminLoginStatus","Admin unlocked.","success")}catch(e){status("adminLoginStatus",e.message,"error")}}
+function showAdmin(){document.getElementById("adminLock").style.display="none";document.getElementById("adminContent").style.display="block"}
+function lockAdmin(){adminSession=null;sessionStorage.removeItem(ADMIN_KEY);document.getElementById("adminLock").style.display="block";document.getElementById("adminContent").style.display="none";lockDashboard()}
+function lockDashboard(){document.getElementById("dashboardLock").style.display="block";document.getElementById("dashboardContent").style.display="none"}
+async function addBranch(){if(!adminSession)return;try{const d=await apiPost({action:"addBranch",branch:document.getElementById("newBranch").value.trim(),adminUsername:adminSession.username,adminPassword:adminSession.password});if(!d.success)throw Error(d.message);status("addBranchStatus",d.message,"success");document.getElementById("newBranch").value="";loadBranches()}catch(e){status("addBranchStatus",e.message,"error")}}
+async function addVehicle(){if(!adminSession)return;try{const d=await apiPost({action:"addVehicle",vehicleNumber:document.getElementById("addVehicleNumber").value.trim(),vehicleName:document.getElementById("addVehicleName").value.trim(),variant:document.getElementById("addVariant").value.trim(),fuel:document.getElementById("addFuel").value,branch:document.getElementById("addBranchSelect").value,adminUsername:adminSession.username,adminPassword:adminSession.password});if(!d.success)throw Error(d.message);status("addVehicleStatus",d.message,"success");["addVehicleNumber","addVehicleName","addVariant"].forEach(id=>document.getElementById(id).value="");loadBranches()}catch(e){status("addVehicleStatus",e.message,"error")}}
+async function loadDashboard(){if(!adminSession)return lockDashboard();document.getElementById("dashboardLock").style.display="none";document.getElementById("dashboardContent").style.display="block";try{const d=await apiGet({action:"getDashboard"});if(!d.success)throw Error(d.message);document.getElementById("dashStats").innerHTML=[["TOTAL TD VEHICLES",d.totalVehicles],["AUDITS COMPLETED",d.totalAudits],["OPEN ISSUES",d.openIssues]].map(x=>`<div class="stat"><div class="lbl">${x[0]}</div><div class="num">${x[1]}</div></div>`).join("");document.getElementById("branchDashboard").innerHTML=`<div class="table-wrap"><table class="table"><thead><tr><th>Branch</th><th>TD Vehicles</th><th>Audits</th><th>Latest Closing</th><th>Status</th></tr></thead><tbody>${d.branches.map(b=>`<tr><td>${esc(b.branch)}</td><td>${b.vehicleCount}</td><td>${b.auditCount}</td><td>${esc(b.latestClosing)}</td><td>${esc(b.closingStatus)}</td></tr>`).join("")}</tbody></table></div>`;renderAttendance(d.attendance)}catch(e){status("dashStatus",e.message,"error")}}
+function renderAttendance(a){if(!a||!a.dates.length)return document.getElementById("attendanceChart").innerHTML="<div class='muted'>No attendance records yet.</div>";let h="<table><thead><tr><th>Branch</th>"+a.dates.map(d=>`<th>${esc(d)}</th>`).join("")+"</tr></thead><tbody>"+a.series.map(s=>`<tr><td>${esc(s.branch)}</td>${s.values.map(v=>`<td>${v}</td>`).join("")}</tr>`).join("")+"</tbody></table>";document.getElementById("attendanceChart").innerHTML=h}
+async function generateReports(){if(!adminSession)return lockDashboard();status("dashStatus","Generating Google Sheet, Excel and PDF...","info");try{const d=await apiPost({action:"generateReports",adminUsername:adminSession.username,adminPassword:adminSession.password});if(!d.success)throw Error(d.message);document.getElementById("dashboardReports").innerHTML=`<div class="status show success">Reports ready: <a href="${d.googleSheetUrl}" target="_blank">Google Sheet</a> • <a href="${d.excelUrl}" target="_blank">Excel</a> • <a href="${d.pdfUrl}" target="_blank">PDF</a></div>`;status("dashStatus","Reports generated.","success")}catch(e){status("dashStatus","Report generation failed: "+e.message,"error")}}
+async function loadReportLinks(){try{const d=await apiGet({action:"getReportLinks"});if(!d.success)throw Error(d.message);document.getElementById("reportLinksHistory").innerHTML=d.reports.length?`<h3 style="margin-top:16px">Generated Reports</h3><div class="table-wrap"><table class="table"><thead><tr><th>Created</th><th>Google Sheet</th><th>Excel</th><th>PDF</th></tr></thead><tbody>${d.reports.map(r=>`<tr><td>${esc(r.createdAt)}</td><td><a target="_blank" href="${r.sheetUrl}">OPEN</a></td><td><a target="_blank" href="${r.excelUrl}">DOWNLOAD</a></td><td><a target="_blank" href="${r.pdfUrl}">DOWNLOAD</a></td></tr>`).join("")}</tbody></table></div>`:"<div class='muted'>No reports generated yet.</div>"}catch(e){status("historyStatus",e.message,"error")}}
+function init(){if(adminSession){showAdmin();loadDashboard()}loadBranches();buildParts();document.getElementById("closingDate").value=new Date().toISOString().slice(0,10)}
+init();
 </script>
 </body>
 </html>
