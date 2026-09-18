@@ -29,7 +29,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
 </style>
 </head>
 <body>
-<header><div class="header-inner"><div><div class="brand">INCHEON KIA • TEST DRIVE AUDIT PORTAL</div><div class="sub"> Vehicle Audit </div></div><div class="sub">Central TD Audit System</div></div></header>
+<header><div class="header-inner"><div><div class="brand">INCHEON KIA • TEST DRIVE AUDIT PORTAL</div><div class="sub"> Vehicle Audit </div></div><div class="sub">Test drive Audit System</div></div></header>
 <main class="container">
 <div class="nav">
 <button class="active" onclick="showSection('searchSection',this)">Vehicle Search</button>
@@ -42,7 +42,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
 </div>
 
 <section id="searchSection" class="section active"><div class="card">
-<h2>Search TD Vehicle</h2><div class="muted">Search by vehicle number. A vehicle-details popup appears before the audit starts.</div>
+<h2>Search TD Vehicle</h2><div class="muted">Search by vehicle number</div>
 <div class="grid" style="margin-top:12px"><div><label>Vehicle Number</label><input id="vehicleNumber" placeholder="KL01AB1234" onkeydown="if(event.key==='Enter')searchVehicle()"></div><div style="align-self:end"><div class="actions"><button class="btn primary" onclick="searchVehicle()">SEARCH VEHICLE</button><button class="btn secondary" onclick="clearSearch()">CLEAR</button></div></div></div>
 <div id="searchStatus" class="status"></div><div id="vehicleResult"></div>
 </div></section>
@@ -78,7 +78,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
 
 <section id="historySection" class="section"><div class="card"><h2>Audit History</h2><div class="grid"><div><label>Vehicle Number (optional)</label><input id="historyVehicle"></div><div><label>Branch</label><select id="historyBranch"></select></div></div><div class="actions"><button class="btn primary" onclick="loadHistory()">LOAD HISTORY</button><button class="btn secondary" onclick="loadReportLinks()">SHOW REPORTS</button></div><div id="historyStatus" class="status"></div><div id="historyResults"></div><div id="reportLinksHistory"></div></div></section>
 
-<section id="closingSection" class="section"><div class="card"><h2>Branch Audit Closing / TD Stock Reconciliation</h2><div class="muted">All status categories must equal TOTAL TEST DRIVE before submission.</div>
+<section id="closingSection" class="section"><div class="card"><h2>Total TD in Branch </h2><div class="muted">All status categories must equal TOTAL TEST DRIVE before submission.</div>
 <div class="grid" style="margin-top:12px"><div><label>Branch</label><select id="closingBranch"></select></div><div><label>Audit Date</label><input id="closingDate" type="date"></div></div>
 <div class="grid3" style="margin-top:12px">
 <div class="stat"><label>TOTAL TEST DRIVE</label><input id="totalTD" type="number" min="0" oninput="recalcClosing()"></div>
@@ -107,7 +107,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;padding:25px}
 <div class="card"><h3>Add TD Vehicle</h3><div class="grid3"><div><label>Vehicle Number</label><input id="addVehicleNumber"></div><div><label>Vehicle Name</label><input id="addVehicleName"></div><div><label>Variant</label><input id="addVariant"></div><div><label>Fuel</label><select id="addFuel"><option value="">Select</option><option>PETROL</option><option>DIESEL</option><option>CNG</option><option>ELECTRIC</option><option>HYBRID</option></select></div><div><label>Branch</label><select id="addBranchSelect"></select></div></div><div class="actions"><button class="btn success" onclick="addVehicle()">ADD VEHICLE</button></div><div id="addVehicleStatus" class="status"></div></div>
 </div></div></section>
 </main>
-<footer>INCHEON KIA • TD Vehicle Audit Portal • Phase 3</footer>
+<footer>INCHEON KIA • TD Vehicle Audit Portal </footer>
 
 <div id="vehicleModal" class="modal"><div class="modal-card"><h2>Vehicle Details</h2><div id="modalVehicle"></div><div class="actions"><button class="btn success" onclick="confirmVehicleAudit()">START AUDIT</button><button class="btn secondary" onclick="closeVehicleModal()">CANCEL</button></div></div></div>
 <input id="photoInput" type="file" accept="image/*" capture="environment" style="display:none">
